@@ -6,7 +6,6 @@ Nexus doesn't provide an official image to run on Raspberry Pi.
 
 So I'm creating one and sharing it with everyone :-) .
 
-(For x64, use the official image - [sonatype/nexus3](https://hub.docker.com/r/sonatype/nexus3/))
 
 
 
@@ -56,6 +55,15 @@ docker buildx build --pull \
   .
 ```
 
+Build AMD 64-bit (amd64):
+
+```bash
+docker buildx build --pull \
+  --platform "linux/amd64" \
+  --tag "klo2k/nexus3" \
+  --output=type=docker \
+  .
+```
 
 
 

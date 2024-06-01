@@ -33,15 +33,11 @@ jobs:
         with:
           version: latest
 
-      - name: Build image (no push)
-        env:
-          NEXUS_VERSION: ${{needs.get_latest_version.outputs.nexus_version}}
-        run: |
-          docker buildx build \
-            --build-arg "NEXUS_VERSION=${NEXUS_VERSION}" \
-            --label org.opencontainers.image.revision="${{github.sha}}" \
-            --label org.opencontainers.image.version="${NEXUS_VERSION}" \
-            --platform "linux/arm/v7,linux/arm64" \
-            --pull \
-            --output "type=image,push=false" \
-            --file ./Dockerfile .
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          build-args: |
+            NEXUS_VERSION=${{ steps.set_nexus_version.outputs.new_version }}
+            platforms: linux/amd64,linux/arm64,linux/arm/v7
