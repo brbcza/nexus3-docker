@@ -28,10 +28,7 @@ jobs:
         with:
           path: |
             /tmp/*.txt
-          key: ${{runner.os}}-build-${{github.sha}}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+          key: ${{runner.os}}-build-${{github.sha}}-${{ needs.get_latest_version.outputs.nexus_version }}
 
       # Parse inputs
       - name: Set Nexus Version
