@@ -88,6 +88,7 @@ jobs:
             push: true
             build-args: |
               NEXUS_VERSION=${{ steps.set_nexus_version.outputs.new_version }}
+              SOURCE_REPO="https://github.com/${{ github.repository }}"
             tags: |
               ghcr.io/${{ github.repository }}:latest
               ghcr.io/${{ github.repository }}:${{ steps.set_nexus_version.outputs.new_version }}
